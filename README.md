@@ -1,5 +1,7 @@
 Oh_My_VIM
+
 Author: Rocky Liu
+
 CopyLeft©2018
 
 Installation
