@@ -8,4 +8,7 @@ Installation
 3. Run $./install_oh_my_vim.sh
 4. Reboot after installation.
 5. Have fun!
-NOTE: I suggest you to install VIM8.0/astyle/git first!
+
+NOTE: 
+1. Current version supports CentOS 6 Only!
+2. I suggest you to install VIM8.0/astyle/git first!
