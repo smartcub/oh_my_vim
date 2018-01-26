@@ -350,7 +350,7 @@
         execute "nnoremap <Leader><Leader>ev :tabedit " .$MYVIMRC ."<CR>"
         execute "nnoremap <Leader><Leader>sv :so " .$MYVIMRC ."<CR>"
         execute "nnoremap <Leader><Leader>eb :tabnew ".g:cvimrcp .g:basicFileName ."<CR>"
-        execute "nnoremap <Leader><Leader>pl :tabnew ".g:cpluginsp .g:vimPlugInsList ."<CR>"
+        execute "nnoremap <Leader><Leader>pl :tabnew ".g:cvimrcp .g:vimPlugInsList ."<CR>"
     endif
     
     " Add simple highlight removal.
