@@ -9,6 +9,7 @@ CopyLeft © 2018 Rocky Liu
 * 1. Run 
 
 	$git clone https://github.com/smartcub/oh_my_vim.git 
+	
 
      in any of your directory.
 
@@ -16,6 +17,7 @@ CopyLeft © 2018 Rocky Liu
 * 3. Run 
 
 	$./install_oh_my_vim.sh
+	
 
      wait untill it shows "[✔]Oh_my_vim Done! Engoy!"
 
@@ -38,5 +40,5 @@ CopyLeft © 2018 Rocky Liu
 
 ## Others:
 
-* 1. You can input ",,pl" in the normal mode in your VIM to edit plug-in list.
-* 2. If you use GVIM, you can input ",,bg" in normal mode to reverse background & colorscheme.
+* 1. You can input ",,pl" in normal mode in your VIM to edit plug-in list.
+* 2. While using GVIM, you can input ",,bg" in normal mode to reverse background & colorscheme.
