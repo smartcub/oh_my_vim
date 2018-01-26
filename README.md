@@ -8,14 +8,14 @@ CopyLeft © 2018 Rocky Liu
 
 1. Run 
 
-    `$git clone https://github.com/smartcub/oh_my_vim.git 
+    `$git clone https://github.com/smartcub/oh_my_vim.git`
 
    in any of your directory.
 
 2. Change dir to oh_my_vim.
 3. Run 
 
-    `$./install_oh_my_vim.sh
+    `$./install_oh_my_vim.sh`
 
    wait untill it shows "[✔]Oh_my_vim Done! Engoy!"
 
