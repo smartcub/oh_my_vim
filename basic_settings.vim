@@ -662,7 +662,8 @@ endif
 "/ Command-T(A tool just like CtrlP)
 "/
 "NOTE: should FIXME!!!
-nmap <C-A-T> :CommandT<CR> 
+"NOTE: Removed by Rocky @ Jan 27, 2018
+"nmap <C-A-T> :CommandT<CR> 
 "/
 "/ END of Command-T
 "/

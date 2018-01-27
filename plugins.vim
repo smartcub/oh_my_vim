@@ -13,7 +13,7 @@ call plug#begin('~/.vim_runenv/plugged')
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'rking/ag.vim'
     Plug 'skwp/greplace.vim'
-    Plug 'wincent/command-t'
+    "Plug 'wincent/command-t'
     Plug 'MarcWeber/vim-addon-mw-utils'
     Plug 'tomtom/tlib_vim'
     Plug 'garbas/vim-snipmate'
