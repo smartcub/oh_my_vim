@@ -621,6 +621,13 @@ endif
                 \ '\.d','\.o','\.so','\.a','\.map','\.bin','\.elf','\.exe',
                 \ '\.\d*\d$','\.git'
                 \ ] 
+
+    " Show Bookmarks list
+    let NERDTreeShowBookmarks=1
+
+    " Set NERDTree window width
+    let NERDTreeWinSize=20
+
     if has("autocmd")
         " Toggle NERDTree when start vim without loading any file
         autocmd VimEnter * if !argc() | NERDTree | endif
@@ -758,23 +765,24 @@ endif
 "/
 " {
     map fg : Dox<CR>
-    let g:DoxygenToolkit_authorName = 'Rocky Liu'
-    let g:DoxygenToolkit_commentType = "C"
-    let g:DoxygenToolkit_briefTag_pre = "@brief "
-    let g:DoxygenToolkit_templateParamTag_pre= "@<T>Param: "
-    let g:DoxygenToolkit_paramTag_pre= "@Param: "
-    let g:DoxygenToolkit_returnTag = "@Return: "
-    let g:DoxygenToolkit_throwTag_pre = "@Throw: " " @exception is also valid"
-    let g:DoxygenToolkit_fileTag = "@File: "
-    let g:DoxygenToolkit_dateTag = "@Date: "
-    let g:DoxygenToolkit_authorTag = "@Author: "
-    let g:DoxygenToolkit_versionTag = "@Ver.: "
-    let g:DoxygenToolkit_blockTag = "@Name: "
-    let g:DoxygenToolkit_classTag = "@Class: "
-    let g:doxygen_enhanced_color = 1
-    let g:DoxygenToolkit_blockHeader = "--------------------------------------------------------------------------------" 
-    let g:DoxygenToolkit_blockFooter = "--------------------------------------------------------------------------------" 
-    let g:DoxygenToolkit_licenseTag = "GNU license"
+    map da : DoxAuthor<CR>
+    let g:DoxygenToolkit_authorName="Rocky Liu"
+    let g:DoxygenToolkit_commentType="C"
+    let g:DoxygenToolkit_briefTag_pre="@brief "
+    let g:DoxygenToolkit_templateParamTag_pre="@<T>Param: "
+    let g:DoxygenToolkit_paramTag_pre="@Param: "
+    let g:DoxygenToolkit_returnTag="@Return: "
+    let g:DoxygenToolkit_throwTag_pre="@Throw: " " @exception is also valid"
+    let g:DoxygenToolkit_fileTag="@File: "
+    let g:DoxygenToolkit_dateTag="@Date: "
+    let g:DoxygenToolkit_authorTag="@Author: "
+    let g:DoxygenToolkit_versionTag="@Ver.: "
+    let g:DoxygenToolkit_blockTag="@Name: "
+    let g:DoxygenToolkit_classTag="@Class: "
+    let g:doxygen_enhanced_color=1
+    let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------------" 
+    let g:DoxygenToolkit_blockFooter="--------------------------------------------------------------------------------" 
+    let g:DoxygenToolkit_licenseTag="GNU license"
 " }
 "/
 "/ END of DoxygenToolkit.vim

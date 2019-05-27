@@ -16,11 +16,12 @@
 " - Press ',,<space>' to turn off the highlight(s).
 " ---------------------------------------End of Shortcuts-----------------------------------------
 "
-" -------------------------------------------For Ctags--------------------------------------------
+" -------------------------------------------For Ctags & Cscope--------------------------------------------
 " - Press ',f' to toggle Ctags tool, then input the tag you want to locate.
 " - Press <F6> key to goto the previous tag.
 " - Press <F7> key to goto the next tag.
-" -----------------------------------------end of Ctags-------------------------------------------
+" - Press <Ctrl><F10> key to rebuild all ctags & cscope.
+" -----------------------------------------end of Ctags & Cscope-------------------------------------------
 "
 " - Press <F11> key to toggle MenuBar & ToolBar in normal mode.
 " - Press <Ctrl><Alt><T> to toggle Command-T tool.
