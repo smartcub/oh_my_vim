@@ -468,7 +468,9 @@ endif
         "       \       exe "normal g'\"" |
         "       \   endif |
         "       \ endif
-        autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exec "normal! g'\"" | endif
+        if has("autocmd")
+            autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exec "normal! g'\"" | endif
+        endif
     " }
 " }
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -780,8 +782,8 @@ endif
     let g:DoxygenToolkit_blockTag="@Name: "
     let g:DoxygenToolkit_classTag="@Class: "
     let g:doxygen_enhanced_color=1
-    let g:DoxygenToolkit_blockHeader="--------------------------------------------------------------------------------" 
-    let g:DoxygenToolkit_blockFooter="--------------------------------------------------------------------------------" 
+    let g:DoxygenToolkit_blockHeader="---------------------------------------------------------------------------" 
+    let g:DoxygenToolkit_blockFooter="---------------------------------------------------------------------------" 
     let g:DoxygenToolkit_licenseTag="GNU license"
 " }
 "/
@@ -944,6 +946,7 @@ vmap <Leader>su ! awk '{ print length(), $0 \| "sort -n \| cut -d \\  -f2-" }'<C
                 silent! execute "!rm -rf tags"
             endif
             silent! execute "!ctags -R --fields=+iaS --extra=+q --c-kinds=+p --c++-kinds=+p"
+            silent! execute "set tags=tags"
             if(executable('cscope') && has("cscope") )
                 if filereadable("cscope.out")
                     silent! execute "cs kill cscope.out"
@@ -1004,5 +1007,90 @@ vmap <Leader>su ! awk '{ print length(), $0 \| "sort -n \| cut -d \\  -f2-" }'<C
                 echohl WarningMSG | echo "Fail to add cscope.out!" | echohl None
             endif
         endif
+    endfunction
+    if 0
+    function! Close_Other_Buf()
+        let l:currentBufNum = bufnr("%")
+        let l:alternateBufNum = bufnr("#")
+        for i in range(1, bufnr("$"))
+            if buflisted(i)
+                if i!=currentBufNum
+                    execute("bdelete ", i)
+                endif
+            endif
+        endfor
+    endfunction
+    endif
+
+    " Borrowed from BufOnly.vim, and thanks to Christian J. Robinson
+    "
+    " BufOnly.vim  -  Delete all the buffers except the current/named buffer.
+    "
+    " Copyright November 2003 by Christian J. Robinson <infynity@onewest.net>
+    "
+    " Distributed under the terms of the Vim license.  See ":help license".
+    "
+    " Usage:
+    "
+    " :Bonly / :BOnly / :Bufonly / :BufOnly [buffer] 
+    "
+    " Without any arguments the current buffer is kept.  With an argument the
+    " buffer name/number supplied is kept.
+
+    command! -nargs=? -complete=buffer -bang Bonly
+                \ :call BufOnly('<args>', '<bang>')
+    command! -nargs=? -complete=buffer -bang BOnly
+                \ :call BufOnly('<args>', '<bang>')
+    command! -nargs=? -complete=buffer -bang Bufonly
+                \ :call BufOnly('<args>', '<bang>')
+    command! -nargs=? -complete=buffer -bang BufOnly
+                \ :call BufOnly('<args>', '<bang>')
+
+    function! BufOnly(buffer, bang)
+        if a:buffer == ''
+            " No buffer provided, use the current buffer.
+            let buffer = bufnr('%')
+        elseif (a:buffer + 0) > 0
+            " A buffer number was provided.
+            let buffer = bufnr(a:buffer + 0)
+        else
+            " A buffer name was provided.
+            let buffer = bufnr(a:buffer)
+        endif
+
+        if buffer == -1
+            echohl ErrorMsg
+            echomsg "No matching buffer for" a:buffer
+            echohl None
+            return
+        endif
+
+        let last_buffer = bufnr('$')
+
+        let delete_count = 0
+        let n = 1
+        while n <= last_buffer
+            if n != buffer && buflisted(n)
+                if a:bang == '' && getbufvar(n, '&modified')
+                    echohl ErrorMsg
+                    echomsg 'No write since last change for buffer'
+                                \ n '(add ! to override)'
+                    echohl None
+                else
+                    silent exe 'bdel' . a:bang . ' ' . n
+                    if ! buflisted(n)
+                        let delete_count = delete_count+1
+                    endif
+                endif
+            endif
+            let n = n+1
+        endwhile
+
+        if delete_count == 1
+            echomsg delete_count "buffer deleted"
+        elseif delete_count > 1
+            echomsg delete_count "buffers deleted"
+        endif
+
     endfunction
 " }
