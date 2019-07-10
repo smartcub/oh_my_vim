@@ -105,6 +105,10 @@ call plug#begin('~/.vim_runenv/plugged')
     Plug 'vim-scripts/DoxygenToolkit.vim'
 " }
 " {
+    " Doxygen
+    "Plug 'abudden/tagHighlight-automirror'
+" }
+" {
     " Source Insight-like code explorer
     Plug 'vim-scripts/SrcExpl'
 " }
