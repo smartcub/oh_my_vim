@@ -50,6 +50,9 @@
         filetype indent on              " Load indent rule for the given filetype
     endif
 
+    " set vimrc, read tags(in current directory, otherwise in parent dir)
+    set tags=./.tags;,.tags
+
     "-----------------------Settings for mouse---------------------"
     if exists("&mouse")
         set mouse=a                             " Use mouse in all modes
@@ -292,6 +295,7 @@
     set ai si "wrap
 
     set nowrap                          " Dont wrap lines
+    "set wrap                          " Wrap lines
     set lbr                             " Dont wrap lines inside a word. This option is not used when 'nowarp'
     set autoindent                      " Copy indent for current line when starting a new line
     set smartindent                     " Imply smart indent when starting a new line
@@ -367,7 +371,7 @@
     
     " Add simple highlight removal.
     nmap <Leader><Leader><space> :nohlsearch<CR>
-    
+
     " Make NERDTree easier to toggle.
     nmap <silent> wm :NERDTreeToggle<CR>
     
@@ -527,6 +531,8 @@ endif
         let g:airline#extensions#tabline#left_alt_sep = '|'
         " defines the name of a formatter for how buffer names are displayed.
         let g:airline#extensions#tabline#formatter = 'unique_tail'
+        let g:airline#extensions#ale#error_symbol = '✘'
+        let g:airline#extensions#ale#warning_symbol = '⚡'
     " }
 
     " Shortcuts for switching buffer
@@ -879,6 +885,114 @@ endif
 "/
 "/ YankRing
 "/
+"
+"/
+"/ For global(gtags)
+"/
+"{
+    let $GTAGSLABEL = 'native-pygments'
+    let $GTAGSCONF  = '/usr/local/share/gtags/gtags.conf'
+"}
+"/
+"/ End of gtags
+"/
+"
+"/ Vim-gutentags
+"{
+    " gutentags 
+    ""if !isdirectory(s:vim_tags)
+    ""    silent! call mkdir(s:vim_tags, 'p')
+    ""endif
+    let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+
+    let g:gutentags_ctags_tagfile = '.tags'
+
+    let g:gutentags_modules = []
+    if executable('ctags')
+        let g:gutentags_modules += ['ctags']
+    endif
+    if executable('gtags-cscope') && executable('gtags')
+        let g:gutentags_modules += ['gtags_cscope']
+    endif
+
+    let g:gutentags_cache_dir = expand('~/.cache/tags')
+
+    let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+    let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
+    let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+    "Add the this line while using universal ctags
+    let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+
+    let g:gutentags_auto_add_gtags_cscope = 0
+    let g:gutentags_plus_switch = 1
+    autocmd FileType qf nnoremap <silent><buffer> <leader>p :PreviewQuickfix<CR>
+    autocmd FileType qf nnoremap <silent><buffer> <leader>P :PreviewClose<CR>
+    nnoremap <leader>u :PreviewScroll -1<CR>
+    nnoremap <leader>d :PreviewScroll +1<CR>
+
+    ""noremap <silent> <c-\>s :GscopeFind s <C-R><C-W><CR>
+    ""noremap <silent> <c-\>g :GscopeFind g <C-R><C-W><CR>
+    ""noremap <silent> <c-\>c :GscopeFind c <C-R><C-W><CR>
+    ""noremap <silent> <c-\>t :GscopeFind t <C-R><C-W><CR>
+    ""noremap <silent> <c-\>e :GscopeFind e <C-R><C-W><CR>
+    ""noremap <silent> <c-\>f :GscopeFind f <C-R>=expand("<cfile>")<CR><CR>
+    ""noremap <silent> <c-\>i :GscopeFind i <C-R>=expand("<cfile>")<CR><CR>
+    ""noremap <silent> <c-\>d :GscopeFind d <C-R><C-W><CR>
+    ""noremap <silent> <c-\>a :GscopeFind a <C-R><C-W><CR>
+    "let g:gutentags_trace = 1
+"}
+"
+"/
+"/ Asyncrun
+"/
+"{
+    " Automatically open quickfix window with height of 6
+    let g:asyncrun_open = 6
+    " Ring bell after mission done
+    let g:asyncrun_bell = 1
+    " Set F10 open/close quickfix window
+    nnoremap <F9> :call asyncrun#quickfix_toggle(6)<cr>
+"}
+"
+"/
+"/ ALE
+"/
+"{
+    let g:ale_linters_explicit = 1
+    let g:ale_sign_column_always = 1
+    let g:ale_set_highlights = 0
+    let g:ale_completion_delay = 500
+    let g:ale_echo_delay = 20
+    let g:ale_lint_delay = 500
+    let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+    let g:ale_lint_on_text_changed = 'normal'
+    let g:ale_lint_on_insert_leave = 1
+    let g:airline#extensions#ale#enabled = 1
+    let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
+    let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
+    let g:ale_c_cppcheck_options = ''
+    let g:ale_cpp_cppcheck_options = ''
+    let g:ale_sign_error = '✘'
+    let g:ale_sign_warning = '⚡'
+    let g:ale_statusline_format = ['✘ %d','⚡ %d','✔ OK']
+    let g:ale_echo_msg_error_str = '✘'
+    let g:ale_echo_msg_warning_str = '⚡'
+    let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+    nmap sp <Plug>(ale_previous_wrap)
+    nmap sn <Plug>(ale_next_wrap)
+    map <C-F7> :ALEToggle<CR>
+    " Not lint when text changed
+    "let g:ale_lint_on_text_changed = 'never'
+    " Not lint on when file open
+    let g:ale_lint_on_enter = 0
+    let g:ale_lint_on_save = 1
+    let g:ale_linters = {
+                \ 'c':['clang'],
+                \ 'c++':['clang'],
+                \ 'python':['pylint'],
+                \}
+"}
 
 "/
 "/ Others
@@ -886,7 +1000,55 @@ endif
 " Sort selected lines in order of shortest to longest during visual mode.
 vmap <Leader>su ! awk '{ print length(), $0 \| "sort -n \| cut -d \\  -f2-" }'<CR>
 "/
+"
+"/
+"/ YouCompleteMe
+"/
+"{
+    "Close auto-pop window(s)
+    set completeopt=menu,menuone
+    let g:ycm_add_preview_to_completeopt = 0
+    let g:ycm_server_log_level = 'info'
+    let g:ycm_min_num_identifier_candidate_chars = 2
+    let g:ycm_collect_identifiers_from_comments_and_strings = 1
+    let g:ycm_complete_in_strings = 1
+    let g:ycm_key_invoke_completion = '<C-q>'
+    set completeopt=menu,menuone
+    noremap <C-q> <NOP>
+    let g:ycm_semantic_triggers =  {
+            \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+            \ 'cs,lua,javascript': ['re!\w{2}'],
+            \ }
+    let g:ycm_global_ycm_extra_conf= '~/.vim_runenv/plugged/YouCompleteMe/.ycm_extra_conf.py'
+    let g:ycm_filetype_whitelist = {
+                            \ "c":1,
+                            \ "cpp":1,
+                            \ "cc":1,
+                            \ "h":1,
+                            \ "hh":1,
+                            \ "objc":1,
+                            \ "sh":1,
+                            \ "zsh":1,
+                            \ "zimbu":1
+                            \ }
+    let g:ycm_show_diagnostics_ui = 0
+    let g:ycm_enable_diagnostics_signs = 0
+    let g:ycm_enable_diagnostics_highlighting = 0
+"}
 "/ END of others
+"/
+
+"/
+"/ Start of Vim-table-mode
+"/
+"{
+    let g:table_mode_corner = '|'
+    let g:table_mode_border = 0
+    let g:table_mode_fillchar = ''
+"}
+"
+"/
+"/ END of Vim-table-mode
 "/
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Build in functions
@@ -961,13 +1123,13 @@ vmap <Leader>su ! awk '{ print length(), $0 \| "sort -n \| cut -d \\  -f2-" }'<C
                 silent! execute "!rm -rf tags"
             endif
             silent! execute "!ctags -R --fields=+iaS --extra=+q --c-kinds=+p --c++-kinds=+p"
-            silent! execute "set tags=tags"
+            silent! execute "set tags=./.tags;,.tags"
             if(executable('cscope') && has("cscope") )
                 if filereadable("cscope.out")
                     silent! execute "cs kill cscope.out"
                 endif
                 silent! execute "!rm -rf cscope.out ncscope.out cscope.files"
-                silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp'  -o -name '*.s' > cscope.files"
+                silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.s' -o -name '*.cc' -o -name '*.hh' > cscope.files"
                 silent! execute "!cscope -Rbq"
             endif
         else
@@ -978,7 +1140,7 @@ vmap <Leader>su ! awk '{ print length(), $0 \| "sort -n \| cut -d \\  -f2-" }'<C
                     silent! execute "cs kill cscope.out"
                 endif
                 silent! execute "!del /f/q cscope.out ncscope.out cscope.files"
-                silent! execute "!dir /s/b *.c,*.cpp,*.h,*.s > cscope.files"
+                silent! execute "!dir /s/b *.c,*.cpp,*.h,*.s,*.cc,*.hh > cscope.files"
                 silent! execute "!cscope -Rbq"
             endif
         endif
@@ -1000,7 +1162,7 @@ vmap <Leader>su ! awk '{ print length(), $0 \| "sort -n \| cut -d \\  -f2-" }'<C
             silent! execute "!ctags -R"
             echo "Generate tags!"
             if filereadable("tags")
-                silent! execute "set tags=tags"
+                silent! execute "set tags=./.tags;,.tags"
                 echo "Add tags!"
             else
                 echohl WarningMSG | echo "Fail to add tags!" | echohl None
@@ -1037,8 +1199,6 @@ vmap <Leader>su ! awk '{ print length(), $0 \| "sort -n \| cut -d \\  -f2-" }'<C
     endfunction
     endif
 
-    " Borrowed from BufOnly.vim, and thanks to Christian J. Robinson
-    "
     " BufOnly.vim  -  Delete all the buffers except the current/named buffer.
     "
     " Copyright November 2003 by Christian J. Robinson <infynity@onewest.net>
@@ -1108,4 +1268,18 @@ vmap <Leader>su ! awk '{ print length(), $0 \| "sort -n \| cut -d \\  -f2-" }'<C
         endif
 
     endfunction
+
+    function! s:isAtStartOfLine(mapping)
+        let text_before_cursor = getline('.')[0 : col('.')-1]
+        let mapping_pattern = '\V' . escape(a:mapping, '\')
+        let comment_pattern = '\V' . escape(substitute(&l:commentstring, '%s.*$', '', ''), '\')
+        return (text_before_cursor =~? '^' . ('\v(' . comment_pattern . '\v)?') . '\s*\v' . mapping_pattern . '\v$')
+    endfunction
+
+    inoreabbrev <expr> <bar><bar>
+                \ <SID>isAtStartOfLine('\|\|') ?
+                \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
+    inoreabbrev <expr> __
+                \ <SID>isAtStartOfLine('__') ?
+                \ '<c-o>:silent! TableModeDisable<cr>' : '__'
 " }

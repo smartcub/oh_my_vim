@@ -120,5 +120,43 @@ call plug#begin('~/.vim_runenv/plugged')
     " YankRing Maintains a history of previous yanks, changes & deletes.
     Plug 'vim-scripts/YankRing.vim'
 " }
+" {
+    if v:version >= 800
+        Plug 'ludovicchabant/vim-gutentags'
+        Plug 'skywind3000/gutentags_plus'
+    endif
+    Plug 'skywind3000/vim-preview'
+" }
+" {
+"   Plug 'tpope/vim-fireplace'
+"   NOTE: you should browse https://github.com/tpope/vim-fireplace first!
+" }
+" {
+    " NOTE: Just for VIM 8.0+
+    Plug 'skywind3000/asyncrun.vim'
+" }
+" {
+    "YouCompleteMe
+    if v:version >= 800
+        Plug 'ycm-core/YouCompleteMe'
+    endif
+" }
+" {
+    " NOTE: for YouCompleteMe
+    ""Plug 'rdnetto/YCM-Generator'
+" }
+" {
+    "Vim table drawer
+    Plug 'godlygeek/tabular'
+    Plug 'dhruvasagar/vim-table-mode'
+" }
+" {
+    "DrawIt
+    Plug 'vim-scripts/DrawIt'
+" }
+" {
+    "Vim-trailing-whitespace
+    Plug 'bronson/vim-trailing-whitespace'
+" }
 " Initialize plugin system
 call plug#end()
