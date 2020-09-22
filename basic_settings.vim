@@ -25,11 +25,11 @@
     set nocompatible                	" We want the latest Vim settings/options.
     set shortmess=atI                   " Do not show any tips of helping Uganda children when startup
     syntax enable
-    
-    
+
+
     let mapleader = ','			" The default leader is \, but a period(comma) is much better.
     let g:mapleader = ','               " With map leader it's possible to do extra key combinations.
-    
+
     set number			    	" Let's activate line numbers.
     set linespace=4			" GUI vim specific line-height.
     " Linebreak on 100 characters
@@ -43,7 +43,7 @@
     set history=1000                    " Set how many lines of history VIM has to remember
     set so=7                            " Set 7 lines to the cursor - when moving vertically using j/k
     set showcmd                         " Show typed command in status bar
-    
+
     if has("eval")
         filetype on                     " Detect file type
         filetype plugin on              " Always ensure enable filetype plugins
@@ -57,7 +57,7 @@
     if exists("&mouse")
         set mouse=a                             " Use mouse in all modes
         set selection=inclusive                 " Include the position of the cursor while selecting text
-        set selectmode=mouse,key                
+        set selectmode=mouse,key
 
         " Automatically close scratch preview while leaving complete pop-window or insert mode
         set mousemodel=popup                    " Pop up menu while click the auxiliary mouse key
@@ -70,11 +70,11 @@
         autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
         autocmd InsertLeave * if pumvisible() == 0|pclose|endif
     endif
-    
+
     "--------------------------Searching---------------------------"
     set hlsearch
     set incsearch
-    
+
     "----------------------Split Management------------------------"
     set splitbelow
     set splitright
@@ -146,46 +146,46 @@
 " {
     " Always show current position
     set ruler
-    
+
     " Force height of the command bar to 1
     set cmdheight=1
-    
+
     " A buffer becomes hidden when it is abandoned
     set hid
-    
+
     " Configure arrow(left/right) keys & backspace so they act as they should act
     set backspace=indent,eol,start 		" Make backspace behave like every other editor.
     set whichwrap+=<,>,h,l                  " Cursor left/right can move to the previous/next line.
-    
+
     " Ignore case while searching
     set ignorecase
-    
+
     " When searching try to be smart about cases
     set smartcase
-    
+
     " Do not redraw while executing macros(good performance config)
     set lazyredraw
-    
+
     " For regular expressions turn magic on
     set magic
-    
+
     " Show matching brackets when text indicator is over them
     set showmatch
-    
+
     " How many tenths of a second to blink when matching brackets
     set mat=2
-    
+
     " No annoying sound on errors
     set noerrorbells visualbell t_vb=	" No damn bells, so turn it OFF!
     set tm=500
-    
+
     " Properly disable sound on errors on MacVim
     if has("gui_macvim")
         autocmd GUIEnter * set vb t_vb=
     endif
 
-    
-    
+
+
 "/
 "/ END of VIM appearences
 "/
@@ -198,7 +198,7 @@
     if has('gui_running')
         set background=dark
         colorscheme solarized
-        set guifont=Fira\ Code\ Light\ 16
+        set guifont=Fira\ Code\ Light\ 14
     else
         try
         " Use 256 colors. This is useful in Gnome Terminal Vim.
@@ -219,34 +219,34 @@
         hi tabline ctermbg=darkblue
         " hi LineNr ctermbg=LightCyan
         hi LineNr ctermfg=LightCyan
-    
+
         "-----------------Will set the spaces for every line
         " set foldcolumn=1
-    
+
         hi foldcolumn guibg=bg
-    
+
         " Get rid of ugly split borders.
         hi vertsplit guifg=cyan guibg=red
         hi vertsplit ctermfg=cyan ctermbg=red
     endif
-    
+
     " This option specifies when the line with tab page labels will be displayed:
     "    0: never
     "    1: only if there at least two tab pages
     "    2: always
     set showtabline=2
-    
+
     " Setting for macOS, DO NOT open this under other system!
-    "set macligatures                         
-    
+    "set macligatures
+
     " We want pretty symbols, when available
-    
+
     set guioptions-=l
     set guioptions-=L
     set guioptions-=r
     set guioptions-=R
     set guioptions-=b     " Hidden bottom scrolling bar
-    
+
     " When 'e' is missing a non-GUI tab pages line may be used.
     " This tells vim DO NOT show GUI tabs above, a non-GUI one is OK.
     " NOTE: Advanced Feature
@@ -257,7 +257,7 @@
         set guioptions-=m
         set guioptions-=T
     endif
-    
+
     " For GUI vim, use <F11> to toggle MenuBar & ToolBar
     " NOTE: Advanced Feature
     map <silent> <F11> :if &guioptions=~#'T'<BAR>
@@ -267,15 +267,15 @@
                             \set guioptions+=T<BAR>
                             \set guioptions+=m<BAR>
                         \endif<CR>
-    	
-    
-    
+
+
+
     " Set utf8 as standard encoding and en_US as the standard language
     set encoding=utf-8
-    
+
     "Use Unix as the standard file type
     set ffs=unix,dos,mac
-    
+
     " Highlight current line / current column
     " NOTE: Advanced feature
     if 1
@@ -289,7 +289,7 @@
 " {
     " Be smart when using tabs ;)
     set smarttab
-    
+
     " Auto indent / Smart indent / Wrap lines
     " NOTE: Dont wrap lines! It conflict with "set nowrap"
     set ai si "wrap
@@ -313,7 +313,7 @@
     else
         autocmd BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
     endif
-    
+
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Visual mode press * or # searches for the current selection
     " Super useful! From an idea
@@ -368,45 +368,45 @@
         execute "nnoremap <Leader><Leader>eb :tabnew ".g:cvimrcp .g:basicFileName ."<CR>"
         execute "nnoremap <Leader><Leader>pl :tabnew ".g:cvimrcp .g:vimPlugInsList ."<CR>"
     endif
-    
+
     " Add simple highlight removal.
     nmap <Leader><Leader><space> :nohlsearch<CR>
 
     " Make NERDTree easier to toggle.
     nmap <silent> wm :NERDTreeToggle<CR>
-    
+
     " Quick search in tags
     nmap <Leader>f :tag<space>
-    
+
     " Hot-key for tag previous(ctags)
     nmap <F6> :tp<CR>
-    
+
     " Hot-key for tag next(ctags)
     nmap <F7> :tn<CR>
 
     " Hot-key for delete all buffers except the current
     nmap <Leader>bdo :BufOnly<CR>
-    
+
     " Useful mappings for managing tabs
     map <ESC>to :tabonly<CR>
     map <ESC>tc :tabclose<CR>
     map <ESC>tn :tabnext<CR>
     map <ESC>tp :tabprevious<CR>
-    
+
     " Opens a new tab with the current buffer's path
     " Super usefull when editing files in the same directory
     map <ESC>te :tabedit <c-r>=expand("%:p:h")<CR>/
-    
+
     " Let '<ESC>tl' toggle between this and the Last accessed Tab
     " NOTE: Advanced feature
     let g:lasttab = 1
     nmap <ESC>tl :exe "tabn ".g:lasttab<CR>
     au TabLeave * let g:lasttab = tabpagenr()
-    
+
     " Switch CWD(current working directory) to the directory of the open path
     " NOTE: also a another way to automatically imply this function, details locate **1
     map <ESC>cd :cd %:p:h<CR>:pwd<CR>
-    
+
     " Eggcache vim
     "nnoremap ; :
     "noremap W w
@@ -418,12 +418,12 @@
 
     " Mapping for indentLine
     " {
-        " Use ',,il' trigger indentLines 
+        " Use ',,il' trigger indentLines
         nmap <Leader><Leader>il :IndentLinesToggle<CR>
     " }
     " Trigger background changing
     " {
-        " Use ',,bg' to change background 
+        " Use ',,bg' to change background
         if has("gui_running")
             noremap <silent> <Leader><Leader>bg :call ToggleBG()<CR>
         endif
@@ -458,9 +458,9 @@ endif
 " => Auto Commands
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " {
-    " Most prefer to automatically switch to the current file directory when a 
+    " Most prefer to automatically switch to the current file directory when a
     " new buffer is opened; to prevent this behavior, add the following to your
-    " vim_global_env.vim file: 
+    " vim_global_env.vim file:
     "   let g:rocky_no_autochdir = 1
     " {
         " Enabled by default
@@ -477,7 +477,7 @@ endif
             autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
         endif
     " }
-    
+
     " Return to last edit position when opening files (You want this!)
     " {
         " This one is also working good
@@ -498,7 +498,7 @@ endif
 " {
     " Always show the status line
     set laststatus=2
-    
+
     " Format the status line
     set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 " }
@@ -520,10 +520,10 @@ endif
         let g:airline#extensions#tabline#enabled = 1
         let g:airline_extensions = ['branch', 'tabline']
 
-        " Configure whether buffer numbers should be shown. 
+        " Configure whether buffer numbers should be shown.
         let g:airline#extensions#tabline#buffer_nr_show = 1
 
-        " enable/disable displaying open splits per tab (only when tabs are opened). 
+        " enable/disable displaying open splits per tab (only when tabs are opened).
         let g:airline#extensions#tabline#show_splits = 1
 
         " configure separators for the tabline only
@@ -547,7 +547,7 @@ endif
     if !exists('g:airline_symbols')
       let g:airline_symbols = {}
     endif
-    
+
     " powerline symbols
     let g:airline_left_sep = ''
     let g:airline_left_alt_sep = ''
@@ -574,7 +574,7 @@ endif
 " {
     " Press ,ss will toggle and untoggle spell checking
     map <silent><Leader>ss :setlocal spell!<CR>
-    
+
     " Shortcuts using <Leader>
     map <Leader>sn ]s
     map <Leader>sp [s
@@ -587,7 +587,7 @@ endif
 " {
     " Remove the Windows  - when the encodings gets messed up
     noremap <Leader>m mmHmt:%s/<C-V><CR>//ge<CR>'tzt'm
-    
+
     " Toggle paste mode on & off
     map <Leader>pp :setlocal paste!<CR>
 " }
@@ -610,11 +610,11 @@ endif
     endif
     let g:ctrlp_match_window = 'top,order:btt,min:1,max:30,results:30'
     let g:ctrlp_working_path_mode ='0' "disable work path mode
-    
+
     " Set this to 1 if you want CtrlP to scan for dotfiles and dotdirs:
     " (hidden files or hidden dirs)
     let g:ctrlp_show_hidden = 1
-    
+
     " Should FIXME!!!
     " {
         nmap <C-A-P> :CtrlP<CR>
@@ -643,7 +643,7 @@ endif
                 \ 'cscope\.','tags','taghl','\.pyc','\~$','\.swp','None',
                 \ '\.d','\.o','\.so','\.a','\.map','\.bin','\.elf','\.exe',
                 \ '\.\d*\d$','\.git'
-                \ ] 
+                \ ]
 
     " Show Bookmarks list
     let NERDTreeShowBookmarks=1
@@ -693,7 +693,7 @@ endif
 "/
 "NOTE: should FIXME!!!
 "NOTE: Removed by Rocky @ Jan 27, 2018
-"nmap <C-A-T> :CommandT<CR> 
+"nmap <C-A-T> :CommandT<CR>
 "/
 "/ END of Command-T
 "/
@@ -746,14 +746,14 @@ endif
     "   ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .
     " <
     map <C-F12> :!ctags -R --c++-kinds=+p --c-kinds=+p --fields=+iaS --extra=+q .<CR>
-    let OmniCpp_MayCompleteDot = 1      " autocomplete with .   
-    let OmniCpp_MayCompleteArrow = 1    " autocomplete with ->   
-    let OmniCpp_MayCompleteScope = 1    " autocomplete with ::   
+    let OmniCpp_MayCompleteDot = 1      " autocomplete with .
+    let OmniCpp_MayCompleteArrow = 1    " autocomplete with ->
+    let OmniCpp_MayCompleteScope = 1    " autocomplete with ::
     let OmniCpp_SelectFirstItem = 1     " select first popup item (inserting it to the text)
-    let OmniCpp_NamespaceSearch = 2     " search namespaces in this and included files   
-    let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype in popup window   
-    let OmniCpp_GlobalScopeSearch=1   
-    let OmniCpp_DisplayMode=1   
+    let OmniCpp_NamespaceSearch = 2     " search namespaces in this and included files
+    let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype in popup window
+    let OmniCpp_GlobalScopeSearch=1
+    let OmniCpp_DisplayMode=1
 " }
 "/
 "/ END of OmniCppComplete
@@ -803,8 +803,8 @@ endif
     let g:DoxygenToolkit_blockTag="@Name: "
     let g:DoxygenToolkit_classTag="@Class: "
     let g:doxygen_enhanced_color=1
-    let g:DoxygenToolkit_blockHeader="---------------------------------------------------------------------------" 
-    let g:DoxygenToolkit_blockFooter="---------------------------------------------------------------------------" 
+    let g:DoxygenToolkit_blockHeader="---------------------------------------------------------------------------"
+    let g:DoxygenToolkit_blockFooter="---------------------------------------------------------------------------"
     let g:DoxygenToolkit_licenseTag="GNU license"
 " }
 "/
@@ -820,18 +820,18 @@ endif
     let g:SrcExpl_refreshTime = 100
     let g:SrcExpl_jumpKey = "<ENTER>"
     let g:SrcExpl_gobackKey = "<SPACE>"
-    let g:SrcExpl_searchLocalDef = 1 
-    let g:SrcExpl_isUpdateTags = 0 
-    let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ." 
-    let g:SrcExpl_updateTagsKey = "<C-F11>" 
-    let g:SrcExpl_prevDefKey = "<C-3>" 
+    let g:SrcExpl_searchLocalDef = 1
+    let g:SrcExpl_isUpdateTags = 0
+    let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ."
+    let g:SrcExpl_updateTagsKey = "<C-F11>"
+    let g:SrcExpl_prevDefKey = "<C-3>"
     let g:SrcExpl_nextDefKey = "<C-4>"
-    
-    let g:SrcExpl_pluginList = [ 
-                \ "__Tag_List__", 
-                \ "_NERD_tree_", 
-                \ "Source_Explorer" 
-                \ ] 
+
+    let g:SrcExpl_pluginList = [
+                \ "__Tag_List__",
+                \ "_NERD_tree_",
+                \ "Source_Explorer"
+                \ ]
 " }
 "/
 "/ END of SrcExpl
@@ -856,9 +856,9 @@ endif
     " {
         if has("cscope")
             set csto=0      " 1 means prioritily use ctags DB, 0 means prioritily use cscope DB
-            set cst         " Search both in cscope & tags DB always 
+            set cst         " Search both in cscope & tags DB always
             set csverb      " Show add DB success or fail
-            set cscopequickfix=s-,c-,d-,i-,t-,e-    " Use quickfix window exploring the result of cscope 
+            set cscopequickfix=s-,c-,d-,i-,t-,e-    " Use quickfix window exploring the result of cscope
         endif
     " }
 
@@ -875,7 +875,7 @@ endif
 " {
     " Remove conflict shortcut with CtrlP
     nmap <Leader>y :YRShow<CR>
-    let g:yankring_replace_n_pkey = '' 
+    let g:yankring_replace_n_pkey = ''
     " Set the following two global varibles will ensure the history is not
     " remembered the next time Vim is started, including NOT create the history
     " file in ~/
@@ -899,7 +899,7 @@ endif
 "
 "/ Vim-gutentags
 "{
-    " gutentags 
+    " gutentags
     ""if !isdirectory(s:vim_tags)
     ""    silent! call mkdir(s:vim_tags, 'p')
     ""endif
@@ -943,6 +943,12 @@ endif
     "let g:gutentags_trace = 1
 "}
 "
+"/
+"/ FixWhitespace
+"/
+"{
+    map <leader>w<space> :FixWhitespace<CR>
+"}
 "/
 "/ Asyncrun
 "/
@@ -1048,6 +1054,28 @@ vmap <Leader>su ! awk '{ print length(), $0 \| "sort -n \| cut -d \\  -f2-" }'<C
 "}
 "
 "/
+"/ LeaderF
+"/
+"{
+" LeaderF
+    let g:Lf_ShortcutF = '<m-f>'
+    noremap <m-m> :LeaderfMru<cr>
+    noremap <m-n> :LeaderfFunction!<cr>
+    noremap <m-b> :LeaderfBuffer<cr>
+    noremap <m-g> :LeaderfTag<cr>
+    let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
+
+    let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+    let g:Lf_WorkingDirectoryMode = 'Ac'
+    let g:Lf_WindowHeight = 0.30
+    let g:Lf_CacheDirectory = expand('~/.vim/cache')
+    let g:Lf_ShowRelativePath = 0
+    let g:Lf_HideHelp = 1
+    let g:Lf_StlColorscheme = 'powerline'
+    let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
+"}
+"
+"/
 "/ END of Vim-table-mode
 "/
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1064,20 +1092,20 @@ vmap <Leader>su ! awk '{ print length(), $0 \| "sort -n \| cut -d \\  -f2-" }'<C
     function! VisualSelection(direction, extra_filter) range
         let l:saved_reg = @"
         execute "normal! vgvy"
-    
+
         let l:pattern = escape(@", "\\/.*'$^~[]")
         let l:pattern = substitute(l:pattern, "\n$", "", "")
-    
+
         if a:direction == 'gv'
             call CmdLine("Ack '" . l:pattern . "' " )
         elseif a:direction == 'replace'
             call CmdLine("%s" . '/'. l:pattern . '/')
         endif
-    
+
         let @/ = l:pattern
         let @" = l:saved_reg
     endfunction
-    
+
     function! HasPaste()
         if &paste
             return 'PASTE MODE  '
@@ -1144,7 +1172,7 @@ vmap <Leader>su ! awk '{ print length(), $0 \| "sort -n \| cut -d \\  -f2-" }'<C
                 silent! execute "!cscope -Rbq"
             endif
         endif
-    
+
         if filereadable("cscope.out")
             silent! execute "cs add cscope.out"
             echo "Add cscope"
@@ -1169,7 +1197,7 @@ vmap <Leader>su ! awk '{ print length(), $0 \| "sort -n \| cut -d \\  -f2-" }'<C
             endif
         endif
     endfunction
-    
+
     function! Cs_add()
         if(executable('cscope'))
             if filereadable("cscope.out")
@@ -1207,7 +1235,7 @@ vmap <Leader>su ! awk '{ print length(), $0 \| "sort -n \| cut -d \\  -f2-" }'<C
     "
     " Usage:
     "
-    " :Bonly / :BOnly / :Bufonly / :BufOnly [buffer] 
+    " :Bonly / :BOnly / :Bufonly / :BufOnly [buffer]
     "
     " Without any arguments the current buffer is kept.  With an argument the
     " buffer name/number supplied is kept.

@@ -158,5 +158,9 @@ call plug#begin('~/.vim_runenv/plugged')
     "Vim-trailing-whitespace
     Plug 'bronson/vim-trailing-whitespace'
 " }
+" {
+    "LeaderF
+    Plug 'Yggdroot/LeaderF'
+" }
 " Initialize plugin system
 call plug#end()
